@@ -1,5 +1,9 @@
 # Coursefar Learning Platform
 
+**Live Demo:** [Open FlowBoard](https://ramtinbabaei.github.io/coursefar/)
+
+https://ramtinbabaei.github.io/coursefar/
+
 Coursefar is a Persian RTL learning-management platform built with React, TypeScript, Vite, Express, SQLite, Zod, Helmet, and Lucide React. It follows the selected **Modern SaaS Learning** visual direction and connects the student, instructor, and administrator experiences through one persistent database.
 
 ## What is included
