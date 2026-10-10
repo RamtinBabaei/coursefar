@@ -14,7 +14,7 @@ export function UserAvatar({user,identityKeys=[],size='md',editable=false,previe
   const name=user?.name??'کاربر Coursefar';
   const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join('');
   // Only the original Arash asset has a special focus; uploaded portraits use center.
-  const arashOriginal=original?.split('?')[0]==='/assets/instructors/arash.png'&&!view.local&&!previewUrl;
+  const arashOriginal=Boolean(original?.split('?')[0].endsWith('/assets/instructors/arash.png'))&&!view.local&&!previewUrl;
 
   useEffect(()=>{
     let active=true;

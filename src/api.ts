@@ -1,12 +1,19 @@
 import {Course, Enrollment, LearningPath, Snapshot, User, emptyData} from './types';
+import {withAssetUrls} from './assets';
+
+export const IS_DEMO_MODE = import.meta.env.MODE === 'pages';
 
 async function request<T>(path:string, options:RequestInit={}){
+  if (IS_DEMO_MODE) {
+    const {demoApi} = await import('./demoApi');
+    return withAssetUrls(await demoApi.request<T>(path, options));
+  }
   const headers=new Headers(options.headers);
   if(options.body && !headers.has('content-type')) headers.set('content-type','application/json');
   const response=await fetch(path,{credentials:'include',...options,headers});
   const json=await response.json().catch(()=>({}));
   if(!response.ok) throw new Error(json.error??'درخواست با خطا روبه‌رو شد.');
-  return json as T;
+  return withAssetUrls(json as T);
 }
 export const api={
   bootstrap:()=>request<Snapshot>('/api/bootstrap'),
