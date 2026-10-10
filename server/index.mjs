@@ -1,3 +1,7 @@
 import {app} from './app.mjs';
-const port=Number(process.env.PORT||3001);
-app.listen(port,'127.0.0.1',()=>console.log(`Coursefar API listening on http://127.0.0.1:${port}`));
+
+const port = Number(process.env.PORT || 3001);
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Coursefar API listening on port ${port}`);
+});
