@@ -1,0 +1,13 @@
+export type Role = 'student' | 'instructor' | 'admin';
+export type User = { id: string; name: string; email: string; role: Role; status: 'active' | 'suspended'; avatar: string | null; avatarUrl?: string | null; specialty: string; bio: string; skills: string[]; portraitIndex: number | null; profileId: string | null; demo: boolean; createdAt: string };
+export type Lesson = { id: string; title: string; content: string; duration: number; preview: boolean };
+export type Course = { id: string; slug: string; title: string; description: string; instructorId: string; category: string; level: string; duration: string; priceValue: number; status: 'draft' | 'published' | 'archived'; cover: string; objectives: string[]; skills: string[]; prerequisites: string; lessons: Lesson[]; pathIds: string[]; rating: string; students: number; createdAt: string };
+export type LearningPath = { id: string; title: string; description: string; level: string; duration: string; color: string; steps: string[]; icon: string };
+export type Enrollment = { id: string; userId: string; courseId: string; completed: string[]; enrolledAt: string };
+export type Activity = { id: string; actorId: string; description: string; createdAt: string };
+export type Snapshot = { user: User | null; csrf: string | null; users: User[]; instructors: User[]; courses: Course[]; paths: LearningPath[]; enrollments: Enrollment[]; bookmarks: string[]; activity: Activity[]; why: Record<string, string> };
+export const roleLabels: Record<Role,string> = { student:'دانشجو', instructor:'مدرس', admin:'مدیر' };
+export const emptyData: Snapshot={user:null,csrf:null,users:[],instructors:[],courses:[],paths:[],enrollments:[],bookmarks:[],activity:[],why:{}};
+export const fa=(n:number)=>n.toLocaleString('fa-IR');
+export const price=(n:number)=>n===0?'رایگان':`${fa(n)} تومان`;
+export const progress=(e:Enrollment,c:Course)=>c.lessons.length?Math.round(e.completed.filter(l=>c.lessons.some(s=>s.id===l)).length/c.lessons.length*100):0;
